@@ -445,9 +445,11 @@
               
               if (config.stateClickAction === 'text') {
                 // textArea.html(target.text);
-                App.contracts.kuniLordInstance.getCurrentPrice(target.name, function(err, currentPrice) {
-                  var nextPrice = parseInt(currentPrice) + 100;
-                  textArea.html('<div class="row"><div class="col-lg-6"><h4>' + target.name + '</h4><span>price: ' + currentPrice + ' GWEI</span></div><div class="col-lg-6"><div class="input-group"><input type="text" class="form-control" value="' + nextPrice + ' GWEI"><span class="input-group-btn"><button class="btn btn-primary occupy-buy" type="button">Buy!</button></span></div></div>');
+                $("#loading").show();
+                App.contracts.kuniLordInstance.getKuniInfo(web3.fromAscii(target.name), function(err, kuniInfo) {
+                  $("#loading").hide();
+                  var nextPrice = parseInt(kuniInfo[3]) + 1000;
+                  textArea.html('<div class="row"><div class="col-lg-6"><h4 class="cur-name">' + target.name + '</h4><span>price: ' + kuniInfo[3] + ' GWEI</span><p>Lord Address: ' + kuniInfo[1] + '</p><p>Lord Name: ' + web3.toAscii(kuniInfo[2]) + '</div><div class="col-lg-6"><div class="input-group"><input type="text" class="form-control cur-price" value="' + nextPrice + ' GWEI"><span class="input-group-btn"><button class="btn btn-primary occupy-buy" type="button">Buy!</button></span></div></div>');
                   $('.occupy-buy').on('click', function() {
                     $('#occupy-confirm .modal-title').text('Occupy ' + target.name);
                     $('#occupy-confirm .modal-body p').text('Occupy ' + target.name);

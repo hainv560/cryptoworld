@@ -39,6 +39,35 @@
 </head>
 
 <body>
+  <div id="loading" style="display:none">
+      <img src="./images/ajax-loader.gif" alt="Loading..."/>
+  </div>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Crypto World</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a id="wallet-addr">Home</a>
+        <li><a id="nickname">Not Set</a>
+          <div class="row">
+            <div class="col-lg-6">
+              <div id="set-nickname" class="input-group" style="display:none">
+                  <input type="text" class="form-control new-nickname" placeholder="Set Nickname">
+                  <span class="input-group-btn"><button type="button" class="btn btn-primary" id="change-nick">Change</button></span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="alert alert-success" style="display:none">
+    <strong>Success!</strong> Please confirm transaction status on blockchain here: <br>
+  </div>
+  <div class="alert alert-danger" style="display:none">
+    <strong>Error!</strong> Something went wrong!
+  </div>
   <div class="map-container">
     <!-- Map html - add the below to your page -->
       <div class="jsmaps-wrapper" id="world-map"></div>
@@ -53,8 +82,9 @@
               <p>One fine body&hellip;</p>
             </div>
             <div class="modal-footer">
+              <input type="hidden" name="nation" value="">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="buyKuni(this)">Buy!</button>
+              <button type="button" class="btn btn-primary buy-kuni">Buy!</button>
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
