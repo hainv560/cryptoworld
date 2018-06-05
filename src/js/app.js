@@ -4,7 +4,6 @@ App = {
   network: '',
 
   init: function() {
-    App.network = App.getNetwork();
     return App.initWeb3();
   },
 
@@ -16,6 +15,7 @@ App = {
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
     }
     web3 = new Web3(App.web3Provider);
+    App.network = App.getNetwork();
     return App.initContract();
   },
 
@@ -95,9 +95,10 @@ App = {
         $('.alert-danger').append(err);
         $('.alert-danger').show();
       } else {
+        var txUrl = 'https://' + network + 'etherscan.io/tx/' + res;
         console.log('Call to blockchain success: ', res)
-        $('.alert-success').append('<a href="https://etherscan.io/tx/"' + res + '">https://etherscan.io/tx/' + res + '</a>');
-        $('.alert-success').show();
+        $('.alert-success').append('<a href="' + txUrl + '">' + txUrl + '</a>');
+        $('.alert-success').show();  
       }
     })
     App.getNickname();
