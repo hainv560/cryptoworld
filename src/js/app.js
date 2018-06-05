@@ -87,6 +87,7 @@ App = {
   setNickname: function(event) {
     var nickname = $('.new-nickname')[0].value;
     if (nickname == "") return;
+    var network = App.network == 'ropsten' ? 'ropsten' : ''
     $("#loading").show();
     App.contracts.kuniLordInstance.setNickname(web3.fromAscii(nickname), function(err, res) {
       $("#loading").hide();
